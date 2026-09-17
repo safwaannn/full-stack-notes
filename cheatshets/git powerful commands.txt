@@ -1,0 +1,62 @@
+git powerfull command
+
+git config
+
+git clone git@gitlab.com:devops-bootcamp3/git-project.git
+
+git init  //initaite the git .git folder will be created
+git add .  	//push files to staging env
+git commit -m "Initial commit"	//push files to local repo
+git remote add origin https://gitlab.com/suhebghare/scripts.git
+git commit -a -m "Initial commit"	//git add push files to local repo
+
+git push	//push to remote repo
+git pull
+git log
+
+
+git branch -M main
+git push -uf origin main
+
+
+git rm -r --cached .idea  //remove cached commited files and commit .gitignore file
+
+
+git checkout -b feature/changes   //create the branch
+
+git push --set-upstream origin feature/changes  //will create new remote repository
+
+git checkout feature/changes   //change to the branch
+git checkout -d feature/changes   //delete the branch
+
+git pull -r 	//pull remote changes with rebase
+
+# merge feature branch into master. Alternatively do the merge from Gitlab UI
+git checkout master
+git merge feature/changes
+
+git state	//check the state
+
+git remote -v	//check remote repo url
+git remote set-url origin git@github.com:devops3018/devops.git	//change remote url to ssh
+
+
+
+--------AWS codecommit for all region--------
+git config --global credential.helper '!aws codecommit credential-helper $@'
+git config --global credential.UseHttpPath true
+
+
+
+
+
+--------------while changing the repo url with all branches
+git checkout master
+git branch -a | grep -v HEAD | cut -d '/' -f3 | grep -v master > /tmp/branches
+for i in `cat /tmp/branches`; do git checkout $i;done
+git fetch --tags
+git remote rm origin
+git remote add origin [git repo url]
+cat .git/config
+git push origin --all
+git push --tags
